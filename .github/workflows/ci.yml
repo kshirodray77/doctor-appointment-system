@@ -7,7 +7,6 @@ on:
     branches: [main]
 
 jobs:
-  # ── Backend Tests ────────────────────────────────────────────────────────────
   backend-test:
     name: Backend — Test & Lint
     runs-on: ubuntu-latest
@@ -20,18 +19,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: backend/package-lock.json
 
       - name: Install backend dependencies
         working-directory: backend
-        run: npm ci
+        run: npm install
 
       - name: Run API tests
         working-directory: backend
@@ -42,32 +39,22 @@ jobs:
           EMAIL_PASS: testpass
         run: npm test
 
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: backend-test-results
-          path: backend/coverage/
-
-  # ── Frontend Build ───────────────────────────────────────────────────────────
   frontend-build:
     name: Frontend — Build Check
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm install
 
       - name: Build React app
         working-directory: frontend
@@ -75,18 +62,11 @@ jobs:
           CI: false
         run: npm run build
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: frontend-build
-          path: frontend/build/
-
-  # ── Security Audit ───────────────────────────────────────────────────────────
   security:
     name: Security Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Audit backend dependencies
         working-directory: backend
