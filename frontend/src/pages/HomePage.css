@@ -1,0 +1,171 @@
+.home { overflow-x: hidden; }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 80px 80px 60px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+}
+
+.hero-tag {
+  display: inline-block;
+  background: #d1fae5;
+  color: #065f46;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  line-height: 1.15;
+  color: #0f172a;
+  margin-bottom: 18px;
+}
+.hero-content h1 span { color: #0f766e; }
+
+.hero-content p {
+  color: #64748b;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  max-width: 440px;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-image {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 30px rgba(15, 118, 110, 0.12);
+  border: 1px solid #e2e8f0;
+  animation: float 4s ease-in-out infinite;
+}
+.hero-card-2 { animation-delay: 2s; margin-left: 40px; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hc-avatar { font-size: 2.2rem; }
+.hc-name { font-weight: 600; color: #0f172a; font-size: 0.95rem; }
+.hc-spec { font-size: 0.8rem; color: #64748b; }
+.hc-rating { margin-left: auto; font-size: 0.9rem; font-weight: 600; }
+
+.hero-stat-pill {
+  background: #0f766e;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  align-self: flex-start;
+  margin-left: 20px;
+}
+
+/* How it works */
+.how-it-works {
+  padding: 80px 80px;
+  text-align: center;
+}
+.how-it-works h2 { font-size: 2.2rem; margin-bottom: 48px; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.step-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.step-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(15, 118, 110, 0.12); }
+
+.step-number {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f766e;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.step-icon { font-size: 2.4rem; margin-bottom: 14px; }
+.step-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #0f172a; }
+.step-card p { color: #64748b; font-size: 0.9rem; line-height: 1.6; }
+
+/* Specializations */
+.specializations {
+  padding: 60px 80px;
+  background: #f8fafc;
+}
+.specializations h2 { font-size: 2rem; margin-bottom: 32px; text-align: center; }
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.spec-card {
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #0f172a;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.spec-card:hover {
+  border-color: #0f766e;
+  background: #f0fdf4;
+  color: #0f766e;
+  transform: translateY(-2px);
+}
+.spec-icon { font-size: 2rem; }
+
+/* Stats */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 60px 80px;
+  background: #0f766e;
+  gap: 0;
+}
+.stat-item { text-align: center; padding: 20px; border-right: 1px solid rgba(255,255,255,0.15); }
+.stat-item:last-child { border-right: none; }
+.stat-value { font-size: 2.4rem; font-weight: 700; color: white; font-family: 'Playfair Display', serif; }
+.stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.75); margin-top: 4px; }
+
+@media (max-width: 900px) {
+  .hero, .how-it-works, .specializations, .stats-section { padding: 40px 24px; }
+  .hero { grid-template-columns: 1fr; }
+  .steps, .spec-grid, .stats-section { grid-template-columns: 1fr 1fr; }
+}

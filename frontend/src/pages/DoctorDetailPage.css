@@ -1,0 +1,91 @@
+.detail-page { padding-bottom: 60px; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.doctor-profile-card { text-align: center; }
+
+.profile-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: white;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  margin: 0 auto 16px;
+}
+
+.doctor-profile-card h2 { font-size: 1.5rem; margin-bottom: 6px; }
+.profile-spec { color: #0f766e; font-weight: 600; margin-bottom: 6px; }
+.profile-hospital { color: #64748b; font-size: 0.88rem; margin-bottom: 20px; }
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 0;
+  margin-bottom: 20px;
+}
+.ps-item { text-align: center; }
+.ps-val { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
+.ps-label { font-size: 0.78rem; color: #64748b; margin-top: 2px; }
+
+.profile-bio, .profile-qualifications { text-align: left; margin-bottom: 20px; }
+.profile-bio h3, .profile-qualifications h3 { font-size: 1rem; margin-bottom: 8px; }
+.profile-bio p { color: #475569; font-size: 0.88rem; line-height: 1.7; }
+.profile-qualifications ul { list-style: none; }
+.profile-qualifications li { font-size: 0.88rem; color: #475569; padding: 4px 0; }
+
+.booking-card h2 { margin-bottom: 6px; }
+.booking-subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 20px; }
+
+.date-group { margin-bottom: 20px; }
+.date-label { font-size: 0.88rem; font-weight: 600; color: #64748b; margin-bottom: 10px; }
+
+.slots-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.slot-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #0f172a;
+}
+.slot-btn:hover { border-color: #0f766e; color: #0f766e; }
+.slot-btn.selected { background: #0f766e; color: white; border-color: #0f766e; }
+
+.no-slots {
+  text-align: center;
+  padding: 32px;
+  color: #64748b;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.booking-form { margin-top: 20px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+.selected-slot-info {
+  background: #f0fdf4;
+  border: 1px solid #d1fae5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #065f46;
+}
+
+@media (max-width: 900px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,203 @@
+{
+  "info": {
+    "name": "MediBook API",
+    "description": "Doctor Appointment Booking System — API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000/api" },
+    { "key": "patient_token", "value": "" },
+    { "key": "doctor_token", "value": "" },
+    { "key": "admin_token", "value": "" },
+    { "key": "doctor_id", "value": "" },
+    { "key": "appointment_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Patient",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/register",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rahul Verma\",\n  \"email\": \"patient@medibook.com\",\n  \"password\": \"patient123\",\n  \"phone\": \"+91 98765 43210\",\n  \"role\": \"patient\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login as Patient",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "const res = pm.response.json();",
+                "pm.collectionVariables.set('patient_token', res.token);"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"patient@medibook.com\",\n  \"password\": \"patient123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login as Admin",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "const res = pm.response.json();",
+                "pm.collectionVariables.set('admin_token', res.token);"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@medibook.com\",\n  \"password\": \"admin123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/auth/me",
+            "header": [{ "key": "Authorization", "value": "Bearer {{patient_token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctors",
+      "item": [
+        {
+          "name": "Get All Doctors",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "const res = pm.response.json();",
+                "if (res.length > 0) pm.collectionVariables.set('doctor_id', res[0]._id);"
+              ]
+            }
+          }],
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/doctors"
+          }
+        },
+        {
+          "name": "Filter by Specialization",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/doctors?specialization=Cardiologist",
+              "query": [{ "key": "specialization", "value": "Cardiologist" }]
+            }
+          }
+        },
+        {
+          "name": "Get Doctor by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/doctors/{{doctor_id}}"
+          }
+        },
+        {
+          "name": "Get Doctor Available Slots",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/doctors/{{doctor_id}}/slots"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "Book Appointment",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "const res = pm.response.json();",
+                "if (res._id) pm.collectionVariables.set('appointment_id', res._id);"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/appointments",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{patient_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doctorId\": \"{{doctor_id}}\",\n  \"date\": \"2026-04-01\",\n  \"time\": \"10:00 AM\",\n  \"reason\": \"Annual checkup\"\n}"
+            }
+          }
+        },
+        {
+          "name": "My Appointments",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/appointments/my",
+            "header": [{ "key": "Authorization", "value": "Bearer {{patient_token}}" }]
+          }
+        },
+        {
+          "name": "Cancel Appointment",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/appointments/{{appointment_id}}/cancel",
+            "header": [{ "key": "Authorization", "value": "Bearer {{patient_token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/stats",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }]
+          }
+        },
+        {
+          "name": "All Appointments",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/appointments",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }]
+          }
+        },
+        {
+          "name": "All Doctors",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/admin/doctors",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }]
+          }
+        }
+      ]
+    }
+  ]
+}
