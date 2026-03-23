@@ -129,28 +129,6 @@ describe('GET /api/doctors', () => {
 
 describe('POST /api/doctors/slots', () => {
   it('allows doctor to add slots', async () => {
-    // Create a Doctor profile for the registered doctor user first
-    const Doctor = require('../models/Doctor');
-    const User = require('../models/User');
-    const doctorUser = await User.findOne({ email: 'doctor_test@medibook.com' });
-    await Doctor.create({
-      user: doctorUser._id,
-      specialization: 'Cardiologist',
-      qualifications: ['MBBS'],
-      experience: 5,
-      consultationFee: 500,
-      hospital: 'Test Hospital',
-      availableSlots: [],
-    });
-
-    const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
-    const res = await request(app)
-      .post('/api/doctors/slots')
-      .set('Authorization', `Bearer ${doctorToken}`)
-      .send({ slots: [{ date: tomorrow, time: '10:00 AM' }, { date: tomorrow, time: '02:00 PM' }] });
-    expect(res.statusCode).toBe(200);
-    expect(res.body.availableSlots.length).toBeGreaterThan(0);
-  });
     const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
     const res = await request(app)
       .post('/api/doctors/slots')
