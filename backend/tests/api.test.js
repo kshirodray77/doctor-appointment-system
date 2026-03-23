@@ -5,7 +5,7 @@
 
 const request = require('supertest');
 const mongoose = require('mongoose');
-const app = require('./server.test-app');
+const app = require('../server.test-app');
 
 let patientToken, doctorToken, adminToken;
 let doctorId, appointmentId;
