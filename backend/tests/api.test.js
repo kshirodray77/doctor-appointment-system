@@ -230,3 +230,4 @@ describe('GET /api/admin/appointments', () => {
     expect(Array.isArray(res.body)).toBe(true);
   });
 });
+
