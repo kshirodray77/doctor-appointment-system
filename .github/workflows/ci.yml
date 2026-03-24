@@ -30,14 +30,16 @@ jobs:
         working-directory: backend
         run: npm install
 
-      - name: Run API tests
+      - name: Fix test path and run tests
         working-directory: backend
         env:
           MONGO_URI_TEST: mongodb://localhost:27017/medibook_test
           JWT_SECRET: test_secret_key_ci
           EMAIL_USER: test@test.com
           EMAIL_PASS: testpass
-        run: npm test
+        run: |
+          sed -i "s|require('./server.test-app')|require('../server.test-app')|g" tests/api.test.js
+          npm test
 
   frontend-build:
     name: Frontend — Build Check
@@ -75,3 +77,4 @@ jobs:
       - name: Audit frontend dependencies
         working-directory: frontend
         run: npm audit --audit-level=high || true
+
